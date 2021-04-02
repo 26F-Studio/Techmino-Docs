@@ -3,10 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>Techmino Docs</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link href="src/favicon.png" rel='icon' type='image/x-icon'/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/themes/vue.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css">
 
@@ -36,7 +37,10 @@
       // homepage: './en-us/README.md',
       // basePath: '/',
       relativePath: true,
-      coverpage: true,
+      coverpage: {
+        '/': '_coverpage.md',
+        '/zh-cn/': '_coverpage.md'
+      },
       // name: 'Techmino',
       // namelink: {
       //   '.*/zh-cn/.*': '/#/zh-cn/',
@@ -47,7 +51,7 @@
       // },
       themeColor: '#188dff',
       // alias:{},
-      autoHeader: true,
+      autoHeader: false,
       // executeScript: true,
       noEmoji: false,
       mergeNavbar: false,
@@ -69,16 +73,14 @@
         '/zh-cn/': '/zh-cn/_404.md',
       },
 
-
       search: {
-        paths: 'auto',
         placeholder: {
+          '/zh-cn': '搜索',
           '/': 'Type to search',
-          '/zh-cn/': '搜索',
         },
         noData: {
+          '/zh-cn': '找不到结果',
           '/': 'No Results',
-          '/zh-cn/': '找不到结果',
         },
         depth: 6,
         hideOtherSidebarContent: false,
@@ -118,7 +120,8 @@
       ]
     };
   </script>
-  <!-- Docsify v4 -->
+
+  <!-- Docsify And Plugins -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/docsify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/plugins/search.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/plugins/ga.min.js"></script>

@@ -1,0 +1,1 @@
+* [Main Page](/ "Techmino is fun!")
