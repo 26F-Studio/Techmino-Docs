@@ -1,3 +1,3 @@
-# TechminoBackend Networking API documentation
+# Techmino
 
 #### Introduction
