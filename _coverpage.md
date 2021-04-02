@@ -7,5 +7,5 @@
 - Easy To Install
 - Cross-platform Support
 
-[Download Now](https://jq.qq.com/?_wv=1027&k=EXHlUEpX)
-[Introduction](/en-US/)
+[Download Now](https://discord.gg/zSXzwkUkVe)
+[Introduction](/README)
