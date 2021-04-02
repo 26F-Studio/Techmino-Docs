@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
@@ -8,15 +9,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 </head>
+
 <body>
-  <div id="app"></div>
+  <div id="app">Loading...</div>
   <script>
     window.$docsify = {
-      name: 'Techmino',
-      repo: '//gitee.com/f26-studio/Techmino'
+      // el: '#app',
+      repo: '//gitee.com/f26-studio/Techmino',
+      // maxLevel: 6,
+      loadNavbar: true,
+      loadSidebar: true,
+      hideSidebar: false,
+      // subMaxLevel: 0,
+      auto2top: true,
+      // homepage: './en-us/README.md',
+      // basePath: '/',
+      relativePath: true,
+      coverpage: true,
+      // name: 'Techmino',
+      // namelink: {
+      //   '.*/zh-cn/.*': '/#/zh-cn/',
+      //   '/#/': '/#/',
+      // },
+      // markdown: {
+      //   smartypants: true,
+      // },
+      themeColor: '#188dff',
+      // alias:{},
+      autoHeader: true,
+      // executeScript: true,
+      noEmoji: false,
+      mergeNavbar: true,
+      formatUpdated: '{MM}/{DD} {HH}:{mm}',
+      // externalLinkTarget: '_self',
+      // cornerExternalLinkTarget: '_self',
+      // externalLinkRel: '',
+      // routerMode: 'history',
+      // crossOriginLinks: ['https://hdustea.3322.org:10081'],
+      // noCompileLinks: ['/foo', '/bar/.*'],
+      onlyCover: false,
+      // requestHeaders: {
+      //   'x-token': 'xxx',
+      // },
+      // ext: '.md',
+      fallbackLanguages: ['fr', 'de'],
+      notFoundPage: {
+        '/': '_404.md',
+        '/zh-cn/': '/zh-cn/_404.md',
+      },
+
+
+      search: {
+        paths: 'auto',
+        placeholder: {
+          '/': 'Type to search',
+          '/zh-cn/': '搜索',
+        },
+        noData: {
+          '/': 'No Results',
+          '/zh-cn/': '找不到结果',
+        },
+        depth: 6,
+        hideOtherSidebarContent: false,
+        pathNamespaces: ['/zh-cn', '/ru-ru', '/ru-ru/v1'],
+      },
+
+      ga: 'G-Q9ZVMCYYFN',
     }
   </script>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/ga.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
 </body>
+
 </html>
