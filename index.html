@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0.8.4/dist/css/theme-simple-dark.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css">
 
-  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0.8.4/dist/js/docsify-themeable.min.js"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNXN79SQ1"></script>
   <script>
@@ -33,7 +32,7 @@
       loadNavbar: true,
       loadSidebar: true,
       hideSidebar: false,
-      // subMaxLevel: 0,
+      subMaxLevel: 3,
       auto2top: true,
       // homepage: './en-us/README.md',
       // basePath: '/',
@@ -90,6 +89,14 @@
 
       ga: 'UA-193637071-1',
 
+      tabs: {
+        persist: true,      // default
+        sync: true,      // default
+        theme: 'classic', // default
+        tabComments: true,      // default
+        tabHeadings: true       // default
+      },
+
       plugins: [
         function (hook, vm) {
           hook.beforeEach(function (html) {
@@ -110,20 +117,23 @@
             var el = document.getElementById('gitalk-container')
             while (el.hasChildNodes()) el.removeChild(el.firstChild)
             gitalk.render('gitalk-container')
+            twemoji.parse(document)
           })
         }
       ]
     };
   </script>
-  <!-- Utils -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script> -->
 
   <!-- Docsify And Plugins -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/docsify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/plugins/search.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/plugins/ga.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/plugins/emoji.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/plugins/zoom-image.min.js"></script>
+
+  <!-- Third party -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0.8.4/dist/js/docsify-themeable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/TaQini/docsify-twemoji@master/twemoji.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1.4.4/dist/docsify-tabs.min.js"></script>
 
   <!-- Coding Highlights -->
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-lua.min.js"></script>
@@ -134,6 +144,7 @@
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-json5.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-bash.min.js"></script>
 
+  <!-- Gitalk -->
   <script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
   <script>
     var gitalk = new Gitalk({
