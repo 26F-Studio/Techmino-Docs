@@ -9,7 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link href="src/favicon.png" rel='icon' type='image/x-icon' />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0.8.4/dist/css/theme-simple-dark.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNXN79SQ1"></script>
@@ -97,26 +96,22 @@
         tabHeadings: true       // default
       },
 
+      Valine: {
+        appId: 'aVgDH5BXeuMch08mNxtRTrJT-MdYXbMMI',
+        appKey: 'FNNK1WYOa9Dwd6wmxCAaVTJy',
+        // docPath: 'hash', //default to `hash` ,or you can choose `full`
+      },
+
       plugins: [
         function (hook, vm) {
           hook.beforeEach(function (html) {
             return html
               + '<hr/>'
-              + '上次更新：{docsify-updated} '
+              + 'Last update: {docsify-updated} '
           })
         },
         function (hook, vm) {
-          hook.mounted(function () {
-            var div = Docsify.dom.create('div')
-            div.id = 'gitalk-container'
-            var main = Docsify.dom.getNode('#main')
-            div.style = `width: ${main.clientWidth}px; margin: 0 auto 20px;`
-            Docsify.dom.appendTo(Docsify.dom.find('.content'), div)
-          })
           hook.doneEach(function () {
-            var el = document.getElementById('gitalk-container')
-            while (el.hasChildNodes()) el.removeChild(el.firstChild)
-            gitalk.render('gitalk-container')
             twemoji.parse(document)
           })
         }
@@ -134,6 +129,8 @@
   <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0.8.4/dist/js/docsify-themeable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/TaQini/docsify-twemoji@master/twemoji.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1.4.4/dist/docsify-tabs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-valine@1.0.4/dist/docsify-valine.min.js"></script>
 
   <!-- Coding Highlights -->
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-lua.min.js"></script>
@@ -143,22 +140,6 @@
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-json.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-json5.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-bash.min.js"></script>
-
-  <!-- Gitalk -->
-  <script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
-  <script>
-    var gitalk = new Gitalk({
-      id: location.href.substring(location.href.indexOf("/Techmino-Docs/#") + "/Techmino-Docs/#".length),
-      title: location.href.substring(location.href.indexOf("/Techmino-Docs/#") + "/Techmino-Docs/#".length),
-      clientID: '9ca79e53a89f1f62436a',
-      clientSecret: '75a6e8fdb243a1cc9f30cbbb8fb996d472bb28df',
-      repo: 'Techmino-Docs',
-      owner: '26F-Studio',
-      admin: ['ParticleG', 'ImpleLee', 'MrZ626', 'flaribbit', 'user670', 'YunyushuLiu', 'Neubulae'],
-      // facebook-like distraction free mode
-      distractionFreeMode: true
-    });
-  </script>
 </body>
 
 </html>
