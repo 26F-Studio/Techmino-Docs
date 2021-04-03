@@ -8,29 +8,30 @@
 
 ```javascript
 {
-    "message": "OK",
+    "type": "Connect",
     "newestCode": 1300,
     "newestName": "foo",
     "lowest": 1226,
     "notice": "Welcome"
 }
 ```
-### 失败返回形式：消息段内 Json + 关闭码
+### 失败返回形式：消息段内 Json + HTTP码
 
 Json 格式错误
 
 ```javascript
-CloseCode = 1007    //WrongMessageContent
+HTTPCode = 1007    //WrongMessageContent
 {
-    "message": "Wrong format",
+    "type": "Error",
     "reason": "Foo and bar"
 }
 ```
 服务器内部错误
 ```javascript
-CloseCode = 1011    //UnexpectedCondition
+HTTPCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error"
+    "reason": "Internal server error"
 }
 ```
 ## 发送消息
@@ -54,7 +55,7 @@ newestOnly = true
 ```javascript
 {
     "action": 0,
-    "message": "OK",
+    "type": "Self",
     "newest":{
       "code": 1300,
       "name": "Alpha 0.13.0",
@@ -66,7 +67,7 @@ newestOnly = false
 ```javascript
 {
     "action": 0,
-    "message": "OK",
+    "type": "Self",
     "newest":{
       "code": 1300,
       "name": "Alpha 0.13.0",
@@ -86,7 +87,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -94,7 +95,8 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error"
+    "reason": "Internal server error"
 }
 ```
 ### 获取公告
@@ -111,7 +113,7 @@ CloseCode = 1011    //UnexpectedCondition
 ```javascript
 {
     "action": 1,
-    "message": "OK",
+    "type": "Self",
     "notice": "Foo and bar"
 }
 ```
@@ -121,7 +123,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -129,11 +131,10 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error"
+    "reason": "Internal server error"
 }
 ```
-# 
-# 
 
 # /tech/socket/v1/user
 
@@ -160,7 +161,7 @@ CloseCode = 1011    //UnexpectedCondition
 >email + password
 ```javascript
 {
-    "message": "Connected",
+    "type": "Connect",
     "id": 114,
     "authToken": "B1234EC0-64A8-46E7-964A-12D45ACFC68B"
 }
@@ -168,7 +169,7 @@ CloseCode = 1011    //UnexpectedCondition
 >id + authToken
 ```javascript
 {
-    "message": "Connected"
+    "type": "Connect"
 }
 ```
 ### 失败返回形式：消息段内 Json + 关闭码
@@ -178,7 +179,7 @@ Json 格式错误
 ```javascript
 CloseCode = 1007    //WrongMessageContent
 {
-    "message": "Wrong format",
+    "type": "Error"
     "reason": "Foo and bar"
 }
 ```
@@ -186,14 +187,16 @@ CloseCode = 1007    //WrongMessageContent
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error"
+    "reason": "Internal server error"
 }
 ```
 请求字段不匹配
 ```javascript
 CloseCode = 1008    //Violation
 {
-    "message": "Foo and bar",
+    "type": "Error"
+    "reason": "Foo and bar"
 }
 ```
 ## 发送消息
@@ -212,7 +215,7 @@ CloseCode = 1008    //Violation
 ```javascript
 {
     "action": 0,
-    "message": "OK"，
+    "type": "Self"，
     "accessToken": "11451419198109220219211379BE702D1F1C704B012241D47AED7ADA7B824FE6"
 }
 ```
@@ -222,7 +225,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -230,13 +233,15 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ### 获取用户信息
@@ -248,7 +253,7 @@ CloseCode = 1011    //UnexpectedCondition
     "action": 1，
     "data":{
         "id": 114,  // return self info if 'id' not exist
-        “detailed": true // default to false if not given
+        "detailed": true // default to false if not given
     }
 }
 ```
@@ -258,7 +263,7 @@ CloseCode = 1011    //UnexpectedCondition
 ```javascript
 {
     "action": 1,
-    "message": "OK"，
+    "type": "Self"，
     "id": 114,
     "email": "1145141919@qq.com",
     "username": "tadokoro_koji",
@@ -270,7 +275,7 @@ CloseCode = 1011    //UnexpectedCondition
 ```javascript
 {
     "action": 1,
-    "message": "OK"，
+    "type": "Self"，
     "id": 114,
     "email": "1145141919@qq.com",
     "username": "tadokoro_koji"
@@ -282,7 +287,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -290,18 +295,17 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 玩家不存在
 ```lua
 {
-    "message": "ID not found",
-    "reason": "Foo and bar"
+    "type": "Error",
+    "reason": "ID not found: Foo and Bar"
 }
 ```
-# 
-# 
 
 # /tech/socket/v1/chat
 
@@ -328,13 +332,13 @@ CloseCode = 1011    //UnexpectedCondition
 >id + accessToken
 ```javascript
 {
-    "message": "Connected"
+    "type": "Connect"
 }
 ```
 >id+ authToken
 ```javascript
 {
-    "message": "Connected",
+    "type": "Connect",
     "id": 114,
     "accessToken": "11451419198109220219211379BE702D1F1C704B012241D47AED7ADA7B824FE6"
 }
@@ -346,7 +350,7 @@ Json 格式错误
 ```javascript
 CloseCode = 1007    //WrongMessageContent
 {
-    "message": "Wrong format",
+    "type": "Error",
     "reason": "Foo and bar"
 }
 ```
@@ -354,14 +358,16 @@ CloseCode = 1007    //WrongMessageContent
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 请求字段不匹配
 ```javascript
 CloseCode = 1008    //Violation
 {
-    "message": "Foo and bar",
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ## 发送消息
@@ -379,7 +385,7 @@ CloseCode = 1008    //Violation
 
 ```javascript
 {
-    "message": "OK",
+    "type": "Self",
     "action": 0,
     "roomList": [
         {
@@ -406,14 +412,15 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ### 接入房间
@@ -433,7 +440,7 @@ Json 格式错误
 >对连接者（私发）
 ```javascript
 {
-    "message": "OK",
+    "type": "Self",
     "action": 1,
     "rid": "global",
     "data": {
@@ -463,7 +470,7 @@ Json 格式错误
 >对房间（排除广播）
 ```javascript
 {
-    "message": "Broadcast",
+    "type": "Broadcast",
     "action": 1,
     "rid": "global",
     "data": {
@@ -478,7 +485,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -486,13 +493,15 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ### 离开房间
@@ -512,7 +521,7 @@ CloseCode = 1011    //UnexpectedCondition
 >对连接者（私发）
 ```javascript
 {
-    "message": "OK",
+    "type": "Self",
     "action": 2,
     "rid": "global"
 }
@@ -520,7 +529,7 @@ CloseCode = 1011    //UnexpectedCondition
 >对房间（排除广播）
 ```javascript
 {
-    "message": "Broadcast",
+    "type": "Broadcast",
     "action": 2,
     "rid": "global",
     "data": {
@@ -535,7 +544,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -543,13 +552,15 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ### 发送广播消息
@@ -569,7 +580,7 @@ CloseCode = 1011    //UnexpectedCondition
 
 ```javascript
 {
-    "message": "Broadcast",
+    "type": "Broadcast",
     "action": 3，
     "rid": "global",
     "data": {
@@ -586,7 +597,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -594,17 +605,17 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
-# 
-# 
 
 # /tech/socket/v1/play
 
@@ -614,15 +625,15 @@ CloseCode = 1011    //UnexpectedCondition
 
 ```javascript
 {
-"id":114,
-"accessToken": "11451419198109220219211379BE702D1F1C704B012241D47AED7ADA7B824FE6"
+    "id":114,
+    "accessToken": "11451419198109220219211379BE702D1F1C704B012241D47AED7ADA7B824FE6"
 }
 ```
 ### 成功返回形式：消息段内Json
 
 ```javascript
 {
-"message": "Connected",
+    "type": "Connect",
     "action": 0
 }
 ```
@@ -633,22 +644,24 @@ Json格式错误
 ```javascript
 CloseCode = 1007    //WrongMessageContent
 {
-"message": "Wrongformat",
-"reason":"Foo and bar"
+    "type": "Warn",
+    "reason": "Foo and bar"
 }
 ```
 服务器内部错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 请求字段不匹配
 ```javascript
 CloseCode = 1008    //Violation
 {
-"message": "Foo and bar",
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ## 发送消息
@@ -661,7 +674,7 @@ CloseCode = 1008    //Violation
 {
     "action": 0,
     "data": {
-        "type": "Solo",  // Return all types if not given
+        "message": "Solo",  // Return all types if not given
         "begin": 10,  // Start from Room 0(first one) if not given
         "count": 15  // Return 10 rooms if not given
     }
@@ -671,7 +684,7 @@ CloseCode = 1008    //Violation
 
 ```javascript
 {
-    "message": "OK",
+    "type": "Self",
     "action": 0,
     "roomList": [
         {
@@ -710,14 +723,15 @@ Json格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ### 创建房间（自动接入）
@@ -739,7 +753,7 @@ Json格式错误
 
 ```javascript
 {
-    "message": "OK",
+    "type": "Self",
     "action": 2,
     "data": {
         "sid": 0,
@@ -755,7 +769,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -763,13 +777,15 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ### 接入房间
@@ -782,7 +798,7 @@ CloseCode = 1011    //UnexpectedCondition
     "data": {
         "rid": "jaisn2329joasjd-1234ejo",  //room id
         "password": "114514",  // Default to "" if not given
-        "config": "asdqwe12eesad21asasd21d45"  // Base64 data 
+        "config": "asdqwe12eesad21asasd21d45"  // Base64 data
     }
 }
 ```
@@ -791,7 +807,7 @@ CloseCode = 1011    //UnexpectedCondition
 >对连接者（私发）
 ```javascript
 {
-    "message": "OK",
+    "type": "Self",
     "action": 2,
     "data": {
         "sid": 0,
@@ -845,7 +861,7 @@ CloseCode = 1011    //UnexpectedCondition
 >对房间（排除广播）
 ```javascript
 {
-    "message": "Broadcast",
+    "type": "Broadcast",
     "action": 2,
     "data": {
         "sid": 0,
@@ -862,7 +878,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -870,13 +886,15 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ### 离开房间
@@ -893,14 +911,14 @@ CloseCode = 1011    //UnexpectedCondition
 >对连接者（私发）
 ```javascript
 {
-    "message": "OK",
+    "type": "Self",
     "action": 3
 }
 ```
 >对房间（排除广播）
 ```javascript
 {
-    "message": "Broadcast",
+    "type": "Broadcast",
     "action": 3,
     "data": {
         "uid": 114,  //user id
@@ -914,7 +932,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -922,13 +940,15 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ### 发送广播消息
@@ -947,7 +967,7 @@ CloseCode = 1011    //UnexpectedCondition
 
 ```javascript
 {
-    "message": "Broadcast",
+    "type": "Broadcast",
     "action": 4，
     "data": {
         "uid": 114,  //user id
@@ -963,7 +983,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -971,13 +991,15 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ### 改变游戏配置
@@ -996,7 +1018,7 @@ CloseCode = 1011    //UnexpectedCondition
 
 ```javascript
 {
-    "message": "Broadcast",
+    "type": "Broadcast",
     "action": 5，
     "data": {
         "uid": 114,  //user id
@@ -1010,7 +1032,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -1018,13 +1040,15 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ### 改变准备状态
@@ -1043,7 +1067,7 @@ CloseCode = 1011    //UnexpectedCondition
 
 ```javascript
 {
-    "message": "Broadcast",
+    "type": "Broadcast",
     "action": 6,
     "data": {
         "uid": 114,  // user id
@@ -1057,7 +1081,7 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -1065,13 +1089,15 @@ Json 格式错误
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ## 接收消息
@@ -1082,7 +1108,7 @@ CloseCode = 1011    //UnexpectedCondition
 
 ```javascript
 {
-    "message": "Server",
+    "type": "Server",
     "action": 7
 }
 ```
@@ -1092,7 +1118,7 @@ CloseCode = 1011    //UnexpectedCondition
 
 ```javascript
 {
-    "message": "Server",
+    "type": "Server",
     "action": 8，
     "data": {
         "rid": "qwe1203j09di-0123dsdjoiqw"  // Stream room id
@@ -1105,7 +1131,7 @@ CloseCode = 1011    //UnexpectedCondition
 
 ```javascript
 {
-    "message": "Server",
+    "type": "Server",
     "action": 9，
     "data": {
         "start": false,
@@ -1138,8 +1164,6 @@ CloseCode = 1011    //UnexpectedCondition
     }
 }
 ```
-# 
-# 
 
 # /tech/socket/v1/stream
 
@@ -1159,7 +1183,7 @@ CloseCode = 1011    //UnexpectedCondition
 >对连接者（私发）
 ```javascript
 {
-    "message": "Connected",
+    "type": "Connect",
     "data": {
         "connected": [
             110,
@@ -1171,7 +1195,7 @@ CloseCode = 1011    //UnexpectedCondition
 >对房间（排除广播）
 ```javascript
 {
-    "message": "Broadcast",
+    "type": "Broadcast",
     "action": 2,
     "data": {
         "uid": 114  //user id
@@ -1183,9 +1207,8 @@ CloseCode = 1011    //UnexpectedCondition
 Json 格式错误
 
 ```javascript
-CloseCode = 1007    //WrongMessageContent
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
@@ -1193,14 +1216,15 @@ CloseCode = 1007    //WrongMessageContent
 ```javascript
 CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Internal error"
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
-请求字段不匹配
-```javascript
-CloseCode = 1008    //Violation
+其他错误
+```lua
 {
-    "message": "Foo and bar",
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ## 发送消息
@@ -1222,7 +1246,7 @@ CloseCode = 1008    //Violation
 
 ```javascript
 {
-    "message": "Broadcast",
+    "type": "Broadcast",
     "action": 4，
     "data": {
         "uid": 114,  //user id
@@ -1237,21 +1261,23 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
-数据校验错误（未实现）
-```lua
-CloseCode = 1008    //Violation
+服务器内部错误
+```javascript
+CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Foo and bar",
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ### 发送录像数据
@@ -1270,7 +1296,7 @@ CloseCode = 1008    //Violation
 
 ```javascript
 {
-    "message": "Broadcast",
+    "type": "Broadcast",
     "action": 5，
     "data": {
         "uid": 114,  //user id
@@ -1284,21 +1310,23 @@ Json 格式错误
 
 ```javascript
 {
-    "message": "Wrong format",
+    "type": "Warn",
     "reason": "Foo and bar"
 }
 ```
-数据校验错误（未实现）
-```lua
-CloseCode = 1008    //Violation
+服务器内部错误
+```javascript
+CloseCode = 1011    //UnexpectedCondition
 {
-    "message": "Foo and bar",
+    "type": "Error",
+    "reason": "Internal server error"
 }
 ```
 其他错误
 ```lua
 {
-    "message": "Foo and bar"
+    "type": "Error",
+    "reason": "Foo and bar"
 }
 ```
 ## 接收消息
@@ -1309,7 +1337,7 @@ CloseCode = 1008    //Violation
 
 ```javascript
 {
-    "message": "Server",
+    "type": "Server",
     "action": 0，
     "data": {
         "seed": 9234614  // Random generator seed
@@ -1322,7 +1350,7 @@ CloseCode = 1008    //Violation
 
 ```javascript
 {
-    "message": "Server",
+    "type": "Server",
     "action": 1
 }
 ```
@@ -1332,7 +1360,7 @@ CloseCode = 1008    //Violation
 
 ```javascript
 {
-    "message": "Server",
+    "type": "Server",
     "action": 3
     "data": {
         "uid": 114  //user id
