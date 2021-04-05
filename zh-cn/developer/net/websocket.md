@@ -1063,7 +1063,7 @@ CloseCode = 1011    //UnexpectedCondition
     }
 }
 ```
-#### 成功返回形式：消息段内 Json（房间内排除广播）
+#### 成功返回形式：消息段内 Json（房间内广播）
 
 ```javascript
 {
