@@ -152,7 +152,7 @@ CloseCode = 1011    //UnexpectedCondition
 >id + authToken
 ```javascript
 {
-    "id":114,
+    "uid":114,
     "authToken": "B1234EC0-64A8-46E7-964A-12D45ACFC68B"
 }
 ```
@@ -162,7 +162,7 @@ CloseCode = 1011    //UnexpectedCondition
 ```javascript
 {
     "type": "Connect",
-    "id": 114,
+    "uid": 114,
     "authToken": "B1234EC0-64A8-46E7-964A-12D45ACFC68B"
 }
 ```
@@ -252,8 +252,8 @@ CloseCode = 1011    //UnexpectedCondition
 {
     "action": 1，
     "data":{
-        "id": 114,  // return self info if 'id' not exist
-        "detailed": true // default to false if not given
+        "uid": 114,  // return self info if 'id' not exist
+        "hash": "asdqwniasd12e21edqwad" // default to false if not given
     }
 }
 ```
@@ -264,11 +264,13 @@ CloseCode = 1011    //UnexpectedCondition
 {
     "action": 1,
     "type": "Self"，
-    "id": 114,
-    "email": "1145141919@qq.com",
-    "username": "tadokoro_koji",
-    "motto": "yarimasune",
-    "avatar": "data:image/jpg;base64,/9j/4AAQS4JxJBjiQT/2Q=="
+    "data": {
+        "uid": 114,
+        "username": "tadokoro_koji",
+        "motto": "yarimasune",
+        "avatar": "data:image/jpg;base64,/9j/4AAQS4JxJBjiQT/2Q==" // won't give if hash not exists or equal to server
+    }
+    
 }
 ```
 >detailed = false
@@ -276,7 +278,7 @@ CloseCode = 1011    //UnexpectedCondition
 {
     "action": 1,
     "type": "Self"，
-    "id": 114,
+    "uid": 114,
     "email": "1145141919@qq.com",
     "username": "tadokoro_koji"
 }
@@ -316,14 +318,14 @@ CloseCode = 1011    //UnexpectedCondition
 >id + accessToken
 ```javascript
 {
-    "id":114,
+    "uid":114,
     "accessToken": "11451419198109220219211379BE702D1F1C704B012241D47AED7ADA7B824FE6"
 }
 ```
 >id + authToken
 ```javascript
 {
-    "id":114,
+    "uid":114,
     "authToken": "B1234EC0-64A8-46E7-964A-12D45ACFC68B"
 }
 ```
@@ -339,7 +341,7 @@ CloseCode = 1011    //UnexpectedCondition
 ```javascript
 {
     "type": "Connect",
-    "id": 114,
+    "uid": 114,
     "accessToken": "11451419198109220219211379BE702D1F1C704B012241D47AED7ADA7B824FE6"
 }
 ```
@@ -625,7 +627,7 @@ CloseCode = 1011    //UnexpectedCondition
 
 ```javascript
 {
-    "id":114,
+    "uid":114,
     "accessToken": "11451419198109220219211379BE702D1F1C704B012241D47AED7ADA7B824FE6"
 }
 ```
@@ -1198,7 +1200,8 @@ CloseCode = 1011    //UnexpectedCondition
     "type": "Broadcast",
     "action": 2,
     "data": {
-        "uid": 114  //user id
+        "uid": 114,  //user id
+        "watch": false
     }
 }
 ```
