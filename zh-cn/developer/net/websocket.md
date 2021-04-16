@@ -696,8 +696,6 @@ CloseCode = 1011    //UnexpectedCondition
     "type": "Self",
     "action": 2,
     "data": {
-        "sid": 0,
-        "ready": false,
         "histories": [
             {
                 "uid": 114,
