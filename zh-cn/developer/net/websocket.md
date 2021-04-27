@@ -201,12 +201,11 @@ CloseCode = 1011    //UnexpectedCondition
     "action": 1,
     "data": {
         "uid": 114,  // default to self info if not given
-        "hash": "asdqwniasd12e21edqwad" // default to false if not given
+        "hash": "asdqwniasd12e21edqwad"
     }
 }
 ```
 #### <b><font size=4 color=#609070>成功返回：消息段内Json</font></b>
->detailed = true
 ```json
 {
     "action": 1,
@@ -215,17 +214,8 @@ CloseCode = 1011    //UnexpectedCondition
         "uid": 114,
         "username": "tadokoro_koji",
         "motto": "yarimasune",
-        "avatar": "data:image/jpg;base64,/9j/4AAQS4JxJBjiQT/2Q==" // won't give if hash not exists or equal to server
+        "avatar": "data:image/jpg;base64,/9j/4AAQS4JxJBjiQT/2Q=="  // Won't give if hash not exists or equal to server
     }
-}
-```
->detailed = false
-```json
-{
-    "action": 1,
-    "type": "Self",
-    "uid": 114,
-    "username": "tadokoro_koji"
 }
 ```
 #### <b><font size=4 color=#609070>失败返回：消息段内Json 和/或 关闭码</font></b>
@@ -634,10 +624,10 @@ CloseCode = 1008    //Violation
 {
     "action": 1,
     "data": {
-        "type": "solo", // Default to "classic" if not given
+        "type": "solo",  // Default to "classic" if not given
         "name": "test 4",  // Default to "{typeName} room" if not given
         "password": "114514",  // Default to "" if not given
-        "config": "asdqwe12eesad21asasd21d45" // Base64 data 
+        "config": "asdqwe12eesad21asasd21d45"  // Base64 data 
     }
 }
 ```
@@ -1020,7 +1010,7 @@ CloseCode = 1011    //UnexpectedCondition
 {
     "uid": 114,
     "accessToken": "11451419198109220219211379BE702D1F1C704B012241D47AED7ADA7B824FE6",
-    "rid": "qwe1203j09di-0123dsdjoiqw" // Stream room id
+    "rid": "qwe1203j09di-0123dsdjoiqw"  // Stream room id
 }
 ```
 #### <b><font size=4 color=#609070>成功返回：消息段内Json</font></b>
