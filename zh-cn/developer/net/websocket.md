@@ -182,6 +182,52 @@ CloseCode = 1011    //UnexpectedCondition
 }
 ```
 
+### <b><font size=5 color=#F0E070>获取在线数量</font></b>
+
+#### <b><font size=4 color=#609070>请求：消息段内 Json</font></b>
+
+```json
+{
+    "action": 3
+}
+```
+
+#### <b><font size=4 color=#609070>成功返回：消息段内 Json</font></b>
+
+```json
+{
+  "action": 3,
+  "type": "Self",
+  "data": {
+    "chat": 114,
+    "play": 514,
+    "stream": 1919,
+    "user": 810,
+  }
+}
+```
+
+#### <b><font size=4 color=#609070>失败返回：消息段内 Json 和/或 关闭码</font></b>
+
+> Json 格式错误
+
+```json
+{
+  "type": "Warn",
+  "reason": "Foo and bar"
+}
+```
+
+> 服务器内部错误
+
+```json
+CloseCode = 1011    //UnexpectedCondition
+{
+    "type": "Error",
+    "reason": "Internal server error"
+}
+```
+
 ## <b><font size=6 color=#50E8B0>接收消息</font></b>
 
 ### <b><font size=5 color=#F0E070>验证邮件发送结果</font></b>
