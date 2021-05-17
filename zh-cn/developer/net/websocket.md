@@ -188,7 +188,7 @@ CloseCode = 1011    //UnexpectedCondition
 
 ```json
 {
-    "action": 3
+  "action": 3
 }
 ```
 
@@ -202,7 +202,7 @@ CloseCode = 1011    //UnexpectedCondition
     "chat": 114,
     "play": 514,
     "stream": 1919,
-    "user": 810,
+    "user": 810
   }
 }
 ```
@@ -1519,6 +1519,27 @@ CloseCode = 1011    //UnexpectedCondition
   "type": "Connect",
   "data": {
     "connected": [110, 111]
+  }
+}
+```
+
+```json
+{
+  "type": "Self",
+  "action": 2,
+  "data": {
+    "uid": 112,
+    "watch": true,
+    "histories": [
+      {
+        "uid": 110,
+        "streams": "12ij30912jdsoa"
+      },
+      {
+        "uid": 111,
+        "streams": "12983ibedsodfgiho32"
+      }
+    ]
   }
 }
 ```
