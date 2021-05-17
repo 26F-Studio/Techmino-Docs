@@ -1031,8 +1031,9 @@ CloseCode = 1008    //Violation
 {
   "action": 1,
   "data": {
-    "type": "solo", // Default to "classic" if not given
-    "name": "test 4", // Default to "{typeName} room" if not given
+    "capacity": 5,
+    "roomInfo": {},
+    "roomData": {},
     "password": "114514", // Default to "" if not given
     "config": "asdqwe12eesad21asasd21d45" // Base64 data
   }
@@ -1108,6 +1109,11 @@ CloseCode = 1011    //UnexpectedCondition
   "type": "Self",
   "action": 2,
   "data": {
+    "sid": 3,
+    "ready": false,
+    "roomInfo": {},
+    "roomData": {},
+    "srid": "123hdas98hd1293", // Doesn't exist if there's no related stream room
     "histories": [
       {
         "uid": 114,
@@ -1530,7 +1536,7 @@ CloseCode = 1011    //UnexpectedCondition
   "data": {
     "uid": 112,
     "watch": true,
-    "histories": [
+    "histories": [  // Doesn't exist if watch is false
       {
         "uid": 110,
         "streams": "12ij30912jdsoa"
